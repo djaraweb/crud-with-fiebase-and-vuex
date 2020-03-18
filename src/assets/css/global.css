@@ -1,0 +1,10 @@
+@import "../../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+@import url("https://fonts.googleapis.com/css?family=Lato&display=swap");
+
+@import "../font-awesome-4.7.0/css/font-awesome.min.css";
+
+#app {
+  font-family: "Lato", sans-serif;
+  text-align: center;
+  color: #2c3e50;
+}
