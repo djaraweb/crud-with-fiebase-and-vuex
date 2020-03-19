@@ -34,7 +34,10 @@
               </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Login</button>
+            <button type="submit" class="btn btn-primary">
+              <i class="fa fa-pd-expand fa-sign-in"></i>
+              Login
+            </button>
           </form>
         </div>
       </div>

@@ -44,11 +44,10 @@
               </div>
             </div>
 
-            <button
-              type="submit"
-              class="btn btn-primary"
-              :disabled="!desactivarBoton"
-            >Registrar Usuario</button>
+            <button type="submit" class="btn btn-primary" :disabled="!desactivarBoton">
+              <i class="fa fa-lg fa-check-square-o"></i>
+              Registrar Usuario
+            </button>
           </form>
         </div>
       </div>

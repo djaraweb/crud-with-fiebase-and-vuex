@@ -61,9 +61,10 @@ export default new Vuex.Store({
     loadTasks({ commit }) {
       this.state.loading = true;
       let tasks = [];
+      var user = db.auth().currentUser;
 
       db.firestore()
-        .collection("tasks")
+        .collection(user.email)
         .get()
         .then((querySnapshot) => {
           querySnapshot.forEach((item) => {
@@ -77,8 +78,9 @@ export default new Vuex.Store({
     },
     loadTask({ commit }, Id) {
       this.state.loading = true;
+      var user = db.auth().currentUser;
       db.firestore()
-        .collection("tasks")
+        .collection(user.email)
         .doc(Id)
         .get()
         .then((doc) => {
@@ -91,8 +93,10 @@ export default new Vuex.Store({
     },
     editarTask({ commit }, task) {
       this.state.loading = true;
+      var user = db.auth().currentUser;
+
       db.firestore()
-        .collection("tasks")
+        .collection(user.email)
         .doc(task.id)
         .update({
           name: task.name
@@ -102,8 +106,10 @@ export default new Vuex.Store({
     },
     agregarTask({ commit }, task) {
       this.state.loading = true;
+      var user = db.auth().currentUser;
+
       db.firestore()
-        .collection("tasks")
+        .collection(user.email)
         .add(task)
         .then((doc) => {
           //console.log(doc.id);
@@ -113,8 +119,10 @@ export default new Vuex.Store({
     },
     eliminarTask({ commit, dispatch }, Id) {
       this.state.loading = true;
+      var user = db.auth().currentUser;
+
       db.firestore()
-        .collection("tasks")
+        .collection(user.email)
         .doc(Id)
         .delete()
         .then(() => {
@@ -136,7 +144,16 @@ export default new Vuex.Store({
             email: res.user.email,
             uid: res.user.uid
           });
-          router.push({ name: "Home" });
+          // Registrar una tarea para el usuario registrado:
+          db.firestore()
+            .collection(user.email)
+            .add({
+              name: "Tarea de Ejemplo 01",
+              completed: true
+            })
+            .then((doc) => {
+              router.push({ name: "Home" });
+            });
         })
         .catch((err) => {
           //console.log("Error: ", err);
@@ -172,6 +189,7 @@ export default new Vuex.Store({
     },
     detectarUsuario({ commit }, payload) {
       if (payload) {
+        //console.log(db.auth().current);
         commit("setUsuario", {
           email: payload.email,
           uid: payload.uid
