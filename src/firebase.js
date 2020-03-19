@@ -1,5 +1,10 @@
-import firebase from "firebase/app";
-import firestore from "firebase/firestore";
+// Firebase App (the core Firebase SDK) is always required and
+// must be listed before other Firebase SDKs
+var firebase = require("firebase/app");
+
+// Add the Firebase products that you want to use
+require("firebase/auth");
+require("firebase/firestore");
 
 // Your web app's Firebase configuration
 var firebaseConfig = {
@@ -13,8 +18,5 @@ var firebaseConfig = {
 };
 // Initialize Firebase
 const firebaseApp = firebase.initializeApp(firebaseConfig);
-/*firebaseApp.firestore().settings({
-  timestampsInSnapshots: true
-});*/
 
-export default firebaseApp.firestore();
+export default firebaseApp;

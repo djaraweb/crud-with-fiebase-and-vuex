@@ -3,7 +3,7 @@
     <br />
     <h4 class="text-left text-primary">Editar Tarea</h4>
     <!-- {{getTask}} -->
-    <div v-if="getLoading">
+    <div v-if="getLoading" class="text-center">
       <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
       <span class="sr-only">Loading...</span>
     </div>

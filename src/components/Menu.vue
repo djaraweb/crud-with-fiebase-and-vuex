@@ -1,9 +1,9 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <router-link class="navbar-brand" to="/">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav">
+    <div class="navbar-brand">
       <img src="@/assets/logo.png" height="20px" alt="Logo de Vue" />
       CRUD Tareas con Firebase
-    </router-link>
+    </div>
     <button
       class="navbar-toggler"
       type="button"
@@ -18,14 +18,24 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">
-            Home
-            <span class="sr-only">(current)</span>
-          </a>
+        <li class="nav-item" v-if="!existsUsers">
+          <router-link class="nav-link" :to="{name: 'RegistrarUser'}">Registry</router-link>
+        </li>
+        <li class="nav-item" v-if="!existsUsers">
+          <router-link class="nav-link" :to="{name: 'Login'}">Login</router-link>
+        </li>
+
+        <li class="nav-item" v-if="existsUsers">
+          <router-link class="nav-link" :to="{name: 'Home'}">Home</router-link>
+        </li>
+        <li class="nav-item" v-if="existsUsers">
+          <router-link class="nav-link" :to="{name: 'Tasks'}">Tasks</router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">About</a>
+          <router-link class="nav-link" :to="{name: 'About'}">About</router-link>
+        </li>
+        <li class="nav-item" v-if="existsUsers">
+          <a class="nav-link" @click="logout" href="#">Logout</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -42,7 +52,30 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from "vuex";
+
 export default {
-  name: "Menu"
+  name: "Menu",
+  methods: {
+    ...mapActions(["logout"])
+  },
+  computed: {
+    ...mapGetters(["existsUsers"])
+  }
 };
 </script>
+
+<style scoped>
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style>

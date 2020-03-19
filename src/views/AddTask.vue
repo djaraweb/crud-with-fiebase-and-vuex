@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-12">
         <h4 class="text-left text-primary">Agregar Tarea</h4>
-        <div v-if="getLoading">
+        <div v-if="getLoading" class="text-center">
           <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
           <span class="sr-only">Loading...</span>
         </div>

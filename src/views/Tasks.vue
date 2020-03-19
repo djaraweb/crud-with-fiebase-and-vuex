@@ -12,7 +12,7 @@
     </div>
     <div class="row mt-2">
       <div class="col-md-12">
-        <div v-if="getLoading">
+        <div v-if="getLoading" class="text-center">
           <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
           <span class="sr-only">Loading...</span>
         </div>
