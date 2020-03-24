@@ -38,7 +38,11 @@
           <a class="nav-link" @click="logout" href="#">Logout</a>
         </li>
       </ul>
-      <form class="form-inline my-2 my-lg-0" @submit.prevent="filtrarTasks(txt_filtro)">
+      <form
+        class="form-inline my-2 my-lg-0"
+        @submit.prevent="filtrarTasks(txt_filtro)"
+        v-if="existsUsers"
+      >
         <input
           v-model="txt_filtro"
           class="form-control mr-sm-2"
