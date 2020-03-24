@@ -13,10 +13,26 @@ export default new Vuex.Store({
     tasks: [],
     task: {},
     usuario: "",
-    error: ""
+    error: "",
+    txtFiltro: ""
   },
   getters: {
-    getTasks: (state) => state.tasks,
+    //getTasks: (state) => state.tasks,
+    getTasks(state) {
+      let arrayFiltrado = [];
+      if (state.txtFiltro.length > 0) {
+        for (let task of state.tasks) {
+          let nameTask = task.name.toLowerCase();
+          if (nameTask.indexOf(state.txtFiltro) > 0) {
+            arrayFiltrado.push(task);
+          }
+        }
+      } else {
+        arrayFiltrado = state.tasks;
+      }
+      // console.log(state.tasks);
+      return arrayFiltrado;
+    },
     getTask: (state) => state.task,
     getLoading: (state) => state.loading,
     getUsuario: (state) => state.usuario,
@@ -203,6 +219,9 @@ export default new Vuex.Store({
       db.auth().signOut();
       commit("setUsuario", null);
       router.push({ name: "Login" });
+    },
+    filtrarTasks({ commit, state }, payload) {
+      state.txtFiltro = payload.toLowerCase();
     }
   }
 });

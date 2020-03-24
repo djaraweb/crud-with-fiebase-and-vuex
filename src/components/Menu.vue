@@ -38,6 +38,16 @@
           <a class="nav-link" @click="logout" href="#">Logout</a>
         </li>
       </ul>
+      <form class="form-inline my-2 my-lg-0" @submit.prevent="filtrarTasks(txt_filtro)">
+        <input
+          v-model="txt_filtro"
+          class="form-control mr-sm-2"
+          type="text"
+          placeholder="Search tasks"
+          @keyup="filtrarTasks(txt_filtro)"
+        />
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </div>
   </nav>
 </template>
@@ -53,7 +63,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["logout"])
+    ...mapActions(["logout", "filtrarTasks"])
   },
   computed: {
     ...mapGetters(["existsUsers"])
